@@ -35,25 +35,17 @@ FROM employee
 WHERE city = 'San Francisco';
 
 -- Find the invoice total for each customer (customer name and total).
-SELECT 
-	c.customerid, c.firstname,
-    SUM(total) AS Total_Amt
-FROM 
-	invoice i  
-LEFT JOIN 
-	customer c ON i.customerid = c.customerid
-GROUP BY 
-	c.customerid, c.firstname
+SELECT c.customerid, c.firstname, SUM(total) AS Total_Amt
+FROM invoice i  
+LEFT JOIN customer c ON i.customerid = c.customerid
+GROUP BY c.customerid, c.firstname
 ORDER BY c.customerid;
 
+
 -- List the tracks that belong to the genre 'Rock'.
-SELECT 
-	t.name,
-    g.name
-FROM 
-	track t
-LEFT JOIN
-	genre g ON t.genreid = g.genreid
+SELECT  t.name, g.name
+FROM track t
+LEFT JOIN genre g ON t.genreid = g.genreid
 WHERE g.name = 'Rock';
 
 -- Retrieve the average invoice total in the invoices table.
@@ -65,10 +57,12 @@ SELECT *
 FROM employee
 WHERE ReportsTo = 5;
     
+
 -- Get a list of all invoices where the total is greater than 5.00.
 SELECT *
 FROM invoice
 WHERE total > 5.00;
+
 
 -- Retrieve the 5 most expensive tracks.
 SELECT *
@@ -76,13 +70,11 @@ FROM track
 ORDER BY unitprice DESC
 LIMIT 5;
 
+
 --  List all the tracks from the album 'For Those About To Rock'.
-SELECT 
-	t.name,
-    a.title
+SELECT t.name, a.title
 FROM track t
-JOIN album a 	
-	ON t.albumid = a.albumid
+JOIN album a ON t.albumid = a.albumid
 WHERE a.title = 'For Those About To Rock We Salute You';
 	
 
